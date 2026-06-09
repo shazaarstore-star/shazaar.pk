@@ -12,7 +12,6 @@ create table if not exists public.products (
   stock text default 'In Stock',
   description text not null,
   image text not null,
-  gallery_images jsonb default '[]'::jsonb,
   created_at timestamptz default now()
 );
 
@@ -28,6 +27,10 @@ create table if not exists public.orders (
   customer_city text not null,
   customer_address text not null,
   customer_note text,
+  payment_method text default 'COD',
+  advance_amount text,
+  easypaisa_trx_id text,
+  payment_status text default 'COD Pending',
   status text default 'Pending',
   created_at timestamptz default now()
 );
@@ -56,5 +59,8 @@ create policy "Allow public update orders" on public.orders for update using (tr
 create policy "Allow public delete orders" on public.orders for delete using (true);
 
 
--- If your products table already exists, this safely adds product gallery support.
-alter table public.products add column if not exists gallery_images jsonb default '[]'::jsonb;
+-- Run these safely if your orders table already exists from old version.
+alter table public.orders add column if not exists payment_method text default 'COD';
+alter table public.orders add column if not exists advance_amount text;
+alter table public.orders add column if not exists easypaisa_trx_id text;
+alter table public.orders add column if not exists payment_status text default 'COD Pending';

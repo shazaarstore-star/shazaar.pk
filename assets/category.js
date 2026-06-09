@@ -61,29 +61,50 @@ async function getProducts() {
 }
 
 function productCard(p) {
-  const safe = JSON.stringify({ id:p.id, name:p.name, price:p.price, image:p.image, category:p.category }).replace(/'/g,"&#039;");
-  const msg = encodeURIComponent(`Hello SHAZAAR, I want to order: ${p.name} - ${p.price}`);
+  const msg = encodeURIComponent(
+    `Hello SHAZAAR, I want to order: ${p.name} - ${p.price}`
+  );
+
   return `
     <article class="product-card">
-      <div class="product-image"><img src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy"></div>
+      <div class="product-image">
+        <img src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy">
+      </div>
+
       <div class="product-info">
         <span class="product-category">${escapeHtml(p.category)}</span>
+
         <h4>${escapeHtml(p.name)}</h4>
+
         <p>${escapeHtml(p.description)}</p>
+
         <div class="product-meta-box">
-          <div class="meta-item price-meta"><span>Price</span><strong>${escapeHtml(p.price)}</strong></div>
-          <div class="meta-item stock-meta"><span>Available Stock</span><strong>${escapeHtml(p.stock || "In Stock")}</strong></div>
+          <div class="meta-item price-meta">
+            <span>Price</span>
+            <strong>${escapeHtml(p.price)}</strong>
+          </div>
+
+          <div class="meta-item stock-meta">
+            <span>Available Stock</span>
+            <strong>${escapeHtml(p.stock || "In Stock")}</strong>
+          </div>
         </div>
-        <div class="card-actions three">
-          <a class="read-more-btn" href="product.html?id=${encodeURIComponent(p.id)}">View</a>
-          <button class="add-cart-card" type="button" onclick='addToShazaarCart(${safe},1)'>Add to Cart</button>
-          <a class="wa-card" target="_blank" href="https://wa.me/${window.DEALZONE_CONFIG.whatsappNumber}?text=${msg}">WhatsApp</a>
+
+        <div class="card-actions">
+          <a class="read-more-btn" href="product.html?id=${encodeURIComponent(p.id)}">
+            Read More
+          </a>
+
+          <a class="wa-card"
+             target="_blank"
+             href="https://wa.me/${window.DEALZONE_CONFIG.whatsappNumber}?text=${msg}">
+            Order on WhatsApp
+          </a>
         </div>
       </div>
     </article>
   `;
 }
-
 
 let allProducts = [];
 
