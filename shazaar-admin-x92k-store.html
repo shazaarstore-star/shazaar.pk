@@ -118,14 +118,17 @@
       <div id="fileUpload" class="tab-panel active">
         <label>
           Product Image
-          <input id="productImage" type="file" accept="image/*">
+          <input id="productImage" type="file" accept="image/*" multiple>
+          <small class="field-hint">Select 1 or more images. First image will be main image, all images will appear in Daraz-style gallery.</small>
         </label>
       </div>
 
       <div id="urlUpload" class="tab-panel">
         <label>
           Image URL
-          <input id="productImageUrl" type="url">
+          <input id="productImageUrl" type="url" placeholder="Main image URL">
+          <textarea id="productGalleryUrls" placeholder="Optional: paste extra image URLs, one URL per line"></textarea>
+          <small class="field-hint">Use extra URLs for product carousel/gallery.</small>
         </label>
       </div>
 
