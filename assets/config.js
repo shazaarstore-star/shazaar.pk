@@ -2,6 +2,7 @@ window.DEALZONE_CONFIG = {
   initialPassword: "saeed@1122",
   whatsappNumber: "923258576612",
   supportEmail: "shazaarstore@gmail.com",
+  facebookPixelId: "", // Paste your Meta Pixel ID here, e.g. 1234567890
   cloudinaryCloudName: "dmcw5ene0",
   cloudinaryUploadPreset: "shazaar_products",
   supabaseUrl: "https://afznsxafctckuunxiggf.supabase.co",
